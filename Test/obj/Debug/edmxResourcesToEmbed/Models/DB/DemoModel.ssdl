@@ -12,6 +12,15 @@
     <Property Name="RowModifiedSYSUserID" Type="int" Nullable="false" />
     <Property Name="RowModifiedDateTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SYSUserID" Type="int" />
+    <Property Name="MessageText" Type="varchar(max)" />
+    <Property Name="DatePosted" Type="datetime" />
+  </EntityType>
   <EntityType Name="SYSUser">
     <Key>
       <PropertyRef Name="SYSUserID" />
@@ -197,6 +206,7 @@
   </Association>
   <EntityContainer Name="DemoDBModelStoreContainer">
     <EntitySet Name="LOOKUPRole" EntityType="Self.LOOKUPRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SYSUser" EntityType="Self.SYSUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SYSUserProfile" EntityType="Self.SYSUserProfile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SYSUserRole" EntityType="Self.SYSUserRole" Schema="dbo" store:Type="Tables" />

@@ -14,7 +14,29 @@ namespace Test.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            UserManager UM = new UserManager();
+            ViewBag.UserID = UM.GetUserID(User.Identity.Name);
             return View();
+        }
+
+        [Authorize]
+        public ActionResult ShoutBoxPartial()
+        {
+            return PartialView();
+        }
+
+        [Authorize]
+        public ActionResult SendMessage(int userID, string message)
+        {
+            UserManager UM = new UserManager();
+            UM.AddMessage(userID, message);
+            return Json(new { success = true });
+        }
+        [Authorize]
+        public ActionResult GetMessages()
+        {
+            UserManager UM = new UserManager();
+            return Json(UM.GetAllMessages(), JsonRequestBehavior.AllowGet);
         }
 
         [Authorize]
@@ -29,7 +51,7 @@ namespace Test.Controllers
             return View();
         }
         [AuthorizeRoles("Admin")]
-        public ActionResult ManageUserPartial(string status = "")
+        public ActionResult UserManagePartial(string status = "")
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -67,6 +89,36 @@ namespace Test.Controllers
             UserManager UM = new UserManager();
             UM.UpdateUserAccount(UPV);
             return Json(new { success = true });
+        }
+
+        [AuthorizeRoles("Admin")]
+        public ActionResult DeleteUser(int userID)
+        {
+            UserManager UM = new UserManager();
+            UM.DeleteUser(userID);
+            return Json(new { success = true });
+        }
+
+        [Authorize]
+        public ActionResult EditProfile()
+        {
+            string loginName = User.Identity.Name;
+            UserManager UM = new UserManager();
+            UserProfileView UPV = UM.GetUserProfile(UM.GetUserID(loginName));
+            return View(UPV);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult EditProfile(UserProfileView profile)
+        {
+            if (ModelState.IsValid)
+            {
+                UserManager UM = new UserManager();
+                UM.UpdateUserAccount(profile);
+                ViewBag.Status = "Update Sucessful!";
+            }
+            return View(profile);
         }
     }
 }

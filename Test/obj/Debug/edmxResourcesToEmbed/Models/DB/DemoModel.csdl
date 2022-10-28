@@ -272,5 +272,15 @@
       <End Role="SYSUser" EntitySet="SYSUsers" />
       <End Role="SYSUserRole" EntitySet="SYSUserRoles" />
     </AssociationSet>
+    <EntitySet Name="Messages" EntityType="DemoDBModel.Message" />
   </EntityContainer>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SYSUserID" Type="Int32" />
+    <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DatePosted" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

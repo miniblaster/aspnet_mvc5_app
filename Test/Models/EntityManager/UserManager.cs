@@ -242,5 +242,103 @@ namespace Test.Models.EntityManager
                 }
             }
         }
+
+        public void DeleteUser(int userID)
+        {
+            using (DemoDBEntities db = new DemoDBEntities())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var SUR = db.SYSUserRoles.Where(o => o.SYSUserID == userID);
+                        if (SUR.Any())
+                        {
+                            db.SYSUserRoles.Remove(SUR.FirstOrDefault());
+                            db.SaveChanges();
+                        }
+                        var SUP = db.SYSUserProfiles.Where(o => o.SYSUserID == userID);
+                        if (SUP.Any())
+                        {
+                            db.SYSUserProfiles.Remove(SUP.FirstOrDefault());
+                            db.SaveChanges();
+                        }
+                        var SU = db.SYSUsers.Where(o => o.SYSUserID == userID);
+                        if (SU.Any())
+                        {
+                            db.SYSUsers.Remove(SU.FirstOrDefault());
+                            db.SaveChanges();
+                        }
+                        dbContextTransaction.Commit();
+                    }
+                    catch
+                    {
+                        dbContextTransaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        public UserProfileView GetUserProfile(int userID)
+        {
+            UserProfileView UPV = new UserProfileView();
+            using (DemoDBEntities db = new DemoDBEntities())
+            {
+                var user = db.SYSUsers.Find(userID);
+                if (user != null)
+                {
+                    UPV.SYSUserID = user.SYSUserID;
+                    UPV.LoginName = user.LoginName;
+                    UPV.Password = user.PasswordEncryptedText;
+                    var SUP = db.SYSUserProfiles.Find(userID);
+                    if (SUP != null)
+                    {
+                        UPV.FirstName = SUP.FirstName;
+                        UPV.LastName = SUP.LastName;
+                        UPV.Gender = SUP.Gender;
+                    }
+                    var SUR = db.SYSUserRoles.Find(userID);
+                    if (SUR != null)
+                    {
+                        UPV.LOOKUPRoleID = SUR.LOOKUPRoleID;
+                        UPV.RoleName = SUR.LOOKUPRole.RoleName;
+                        UPV.IsRoleActive = SUR.IsActive;
+                    }
+                }
+            }
+            return UPV;
+        }
+
+        public List<UserMessage> GetAllMessages()
+        {
+            using (DemoDBEntities db = new DemoDBEntities())
+            {
+                var m = (from q in db.SYSUsers
+                         join q2 in db.Messages on q.SYSUserID equals q2.SYSUserID
+                         join q3 in db.SYSUserProfiles on q.SYSUserID equals q3.SYSUserID
+                         select new UserMessage
+                         {
+                             MessageID = q2.MessageID,
+                             SYSUserID = q.SYSUserID,
+                             FirstName = q3.FirstName,
+                             LastName = q3.LastName,
+                             MessageText = q2.MessageText,
+                             LogDate = q2.DatePosted
+                         }).OrderBy(o => o.LogDate);
+                return m.ToList();
+            }
+        }
+        public void AddMessage(int userID, string messageText)
+        {
+            using (DemoDBEntities db = new DemoDBEntities())
+            {
+                Message m = new Message();
+                m.MessageText = messageText;
+                m.SYSUserID = userID;
+                m.DatePosted = DateTime.UtcNow;
+                db.Messages.Add(m);
+                db.SaveChanges();
+            }
+        }
     }
 }

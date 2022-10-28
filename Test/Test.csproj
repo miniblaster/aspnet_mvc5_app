@@ -181,6 +181,9 @@
     <Compile Include="Models\DB\LOOKUPRole.cs">
       <DependentUpon>DemoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\Message.cs">
+      <DependentUpon>DemoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\SYSUser.cs">
       <DependentUpon>DemoModel.tt</DependentUpon>
     </Compile>
@@ -214,8 +217,10 @@
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Home\AdminOnly.cshtml" />
     <Content Include="Views\Home\UnAuthorized.cshtml" />
-    <Content Include="Views\Home\ManageUserPartial.cshtml" />
+    <Content Include="Views\Home\UserManagePartial.cshtml" />
     <Content Include="Scripts\jquery-2.0.0.min.map" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Home\ShoutBoxPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

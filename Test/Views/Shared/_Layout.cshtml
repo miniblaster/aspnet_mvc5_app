@@ -8,7 +8,7 @@
     <link href="~/Content/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/themes/base/all.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    
+
     <script src="~/Scripts/jquery-2.0.0.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
     <script src="~/Content/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -37,14 +37,33 @@
                         <li class="nav-item">
                             @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("AdminOnly", "AdminOnly", "Home", new { area = "" }, new { @class = "nav-link" })
+                            </li>
+                        }
                     </ul>
                     <ul class="auth-sec navbar-nav gap-4">
-                        <li class="nav-item">
-                            @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "" }, new { @class = "nav-link" })
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "nav-link" })
-                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "" }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "nav-link" })
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" style="cursor: pointer">
+                                <p class="dropdown-toggle my-auto" data-toggle="dropdown">@User.Identity.Name</p>
+                                <div class="dropdown-menu bg-light shadow">
+                                    @Html.ActionLink("Edit Profile", "EditProfile", "Home", new { area = "" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("SignOut", "SignOut", "Account", new { area = "" }, new { @class = "dropdown-item" })
+                                </div> 
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -53,14 +72,15 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
+    <hr />
+    <footer class="text-center">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
     @*<script src="~/Content/lib/jquery/dist/jquery.min.js"></script> *@
-    
+
     @* @await RenderSectionAsync("Scripts", required: false) *@
 </body>
 </html>
