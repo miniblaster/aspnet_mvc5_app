@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <link href="~/Content/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    
+    <script src="~/Scripts/jquery-2.0.0.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
+    <script src="~/Content/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @* <link href="~/Content/header.scss" rel="stylesheet" type="text/css" /> *@
+    @* <script src="~/Scripts/modernizr-2.8.3.js"></script> *@
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark text-white border-bottom box-shadow mb-3">
+            <div class="container gap-4">
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-md-inline-flex justify-content-between">
+                    <ul class="home-sec navbar-nav flex-grow-1 gap-4">
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    </ul>
+                    <ul class="auth-sec navbar-nav gap-4">
+                        <li class="nav-item">
+                            @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @*<script src="~/Content/lib/jquery/dist/jquery.min.js"></script> *@
+    
+    @* @await RenderSectionAsync("Scripts", required: false) *@
+</body>
+</html>

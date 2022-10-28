@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f23f0277b5634cffbef4c2ce8bafe4f7" Name="Diagram1">
+        <EntityTypeShape EntityType="DemoDBModel.LOOKUPRole" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoDBModel.SYSUser" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoDBModel.SYSUserProfile" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoDBModel.SYSUserRole" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserRo__LOOKU__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserRo__LOOKU__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserRo__LOOKU__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserRo__LOOKU__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserPr__SYSUs__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserPr__SYSUs__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserPr__SYSUs__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserPr__SYSUs__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserRo__SYSUs__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserRo__SYSUs__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserRo__SYSUs__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoDBModel.FK__SYSUserRo__SYSUs__49C3F6B7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

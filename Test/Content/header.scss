@@ -1,0 +1,9 @@
+﻿header nav .container {
+    background-color: lightblue;    
+}
+
+@media only screen and (max-width: 768px) {
+    header nav .container div.collapse {
+        display: none;
+    }
+}
